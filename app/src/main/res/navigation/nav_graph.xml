@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/currenciesFragment"
         android:name="com.android.currencyconverter.currencies.CurrenciesFragment"
-        android:label="CurrenciesFragment"
+        android:label="@string/currencies"
         tools:layout="@layout/fragment_currencies"/>
 </navigation>
