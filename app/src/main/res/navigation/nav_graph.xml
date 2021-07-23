@@ -10,4 +10,10 @@
         android:name="com.android.currencyconverter.currencies.CurrenciesFragment"
         android:label="@string/currencies"
         tools:layout="@layout/fragment_currencies"/>
+
+    <fragment
+        android:id="@+id/selectedCurrencyFragment"
+        android:name="com.android.currencyconverter.selectedcurrency.SelectedCurrencyFragment"
+        android:label="SelectedCurrencyFragment"
+        tools:layout="@layout/fragment_selected_currency"/>
 </navigation>
