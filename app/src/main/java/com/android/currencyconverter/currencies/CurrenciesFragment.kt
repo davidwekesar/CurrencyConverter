@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.currencyconverter.databinding.FragmentCurrenciesBinding
 import com.android.currencyconverter.repositories.CurrenciesRepository
 
@@ -28,7 +30,13 @@ class CurrenciesFragment : Fragment() {
         _binding = FragmentCurrenciesBinding.inflate(inflater, container, false)
 
         viewModel.currencies.observe(viewLifecycleOwner, { currencies ->
-            binding.currenciesRecyclerView.adapter = CurrencyAdapter(currencies)
+            val dividerItemDecoration = DividerItemDecoration(
+                requireContext(), LinearLayoutManager.VERTICAL
+            )
+            binding.currenciesRecyclerView.apply {
+                adapter = CurrencyAdapter(currencies)
+                addItemDecoration(dividerItemDecoration)
+            }
         })
 
         return binding.root
