@@ -1,18 +1,15 @@
 package com.android.currencyconverter.currencies
 
 import androidx.lifecycle.*
-import com.android.currencyconverter.data.network.CurrencyList
+import com.android.currencyconverter.data.network.Currency
 import com.android.currencyconverter.repositories.CurrenciesRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class CurrenciesViewModel(private val repository: CurrenciesRepository) : ViewModel() {
 
-    private val _currencyList = MutableLiveData<CurrencyList>()
-    val currencyList: LiveData<CurrencyList> get() = _currencyList
-
-    private val _currencies = MutableLiveData<List<String>>()
-    val currencies: LiveData<List<String>> get() = _currencies
+    private val _currencies = MutableLiveData<List<Currency>>()
+    val currencies: LiveData<List<Currency>> get() = _currencies
 
     init {
         getAllCurrencies()
@@ -22,10 +19,10 @@ class CurrenciesViewModel(private val repository: CurrenciesRepository) : ViewMo
         viewModelScope.launch {
             try {
                 val response = repository.getAllCurrencies()
-                _currencyList.value = response
-                val mutableList = mutableListOf<String>()
-                for (currency in response.currencies) {
-                    mutableList.add(currency.value)
+                val mutableList = mutableListOf<Currency>()
+                for (currencyItem in response.currencies) {
+                    val currency = Currency(currencyItem.key, currencyItem.value)
+                    mutableList.add(currency)
                 }
                 _currencies.value = mutableList
                 Timber.d("List: $mutableList")
@@ -47,5 +44,4 @@ class CurrenciesViewModelFactory(
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-
 }

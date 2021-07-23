@@ -3,20 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:paddingStart="@dimen/default_medium"
-    android:paddingEnd="@dimen/default_medium"
     android:paddingTop="@dimen/default_small"
-    android:paddingBottom="@dimen/default_small"
-    android:layout_height="wrap_content">
+    android:paddingEnd="@dimen/default_medium"
+    android:paddingBottom="@dimen/default_small">
 
     <TextView
-        android:id="@+id/textCurrency"
-        android:layout_width="0dp"
+        android:id="@+id/textCurrencyCode"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="US Dollar" />
+        tools:text="USD" />
+
+    <TextView
+        android:id="@+id/textCurrencyName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_medium"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textCurrencyCode"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="United States Dollar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

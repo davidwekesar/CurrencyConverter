@@ -3,10 +3,11 @@ package com.android.currencyconverter.currencies
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.android.currencyconverter.data.network.Currency
 import com.android.currencyconverter.databinding.ListItemCurrencyBinding
 
 class CurrencyAdapter(
-    private val currencies: List<String>
+    private val currencies: List<Currency>
 ) : RecyclerView.Adapter<CurrencyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
@@ -26,9 +27,11 @@ class CurrencyAdapter(
 
 class CurrencyViewHolder(binding: ListItemCurrencyBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    private val textCurrency = binding.textCurrency
+    private val textCurrencyCode = binding.textCurrencyCode
+    private val textCurrencyName = binding.textCurrencyName
 
-    fun bind(currency: String) {
-        textCurrency.text = currency
+    fun bind(currency: Currency) {
+        textCurrencyCode.text = currency.code
+        textCurrencyName.text = currency.name
     }
 }
