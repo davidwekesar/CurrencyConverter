@@ -5,11 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.currencyconverter.R
 import com.android.currencyconverter.databinding.FragmentCurrenciesBinding
 import com.android.currencyconverter.repositories.CurrenciesRepository
+import com.android.currencyconverter.viewmodels.SharedViewModel
 
 class CurrenciesFragment : Fragment() {
 
@@ -21,6 +26,7 @@ class CurrenciesFragment : Fragment() {
     private val viewModel: CurrenciesViewModel by viewModels {
         CurrenciesViewModelFactory(repository)
     }
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,12 +40,20 @@ class CurrenciesFragment : Fragment() {
                 requireContext(), LinearLayoutManager.VERTICAL
             )
             binding.currenciesRecyclerView.apply {
-                adapter = CurrencyAdapter(currencies)
+                adapter = CurrencyAdapter(currencies, CurrencyOnClickListener { currency ->
+                    sharedViewModel.select(currency)
+                    navigateToSelectedCurrencyFragment()
+                })
                 addItemDecoration(dividerItemDecoration)
             }
         })
 
         return binding.root
+    }
+
+    private fun navigateToSelectedCurrencyFragment() {
+        val action = R.id.action_currenciesFragment_to_selectedCurrencyFragment
+        findNavController().navigate(action)
     }
 
     override fun onDestroyView() {

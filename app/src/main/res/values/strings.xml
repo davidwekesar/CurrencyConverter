@@ -3,4 +3,5 @@
     <string name="currencies">Currencies</string>
     <string name="hint_enter_amount">Enter Amount</string>
     <string name="convert">Convert</string>
+    <string name="selected_currency_format">From %1$s</string>
 </resources>

@@ -9,11 +9,15 @@
         android:id="@+id/currenciesFragment"
         android:name="com.android.currencyconverter.currencies.CurrenciesFragment"
         android:label="@string/currencies"
-        tools:layout="@layout/fragment_currencies"/>
+        tools:layout="@layout/fragment_currencies">
+        <action
+            android:id="@+id/action_currenciesFragment_to_selectedCurrencyFragment"
+            app:destination="@id/selectedCurrencyFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/selectedCurrencyFragment"
         android:name="com.android.currencyconverter.selectedcurrency.SelectedCurrencyFragment"
-        android:label="SelectedCurrencyFragment"
+        android:label="@string/convert"
         tools:layout="@layout/fragment_selected_currency"/>
 </navigation>

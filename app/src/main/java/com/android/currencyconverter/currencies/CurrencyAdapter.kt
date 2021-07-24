@@ -7,7 +7,8 @@ import com.android.currencyconverter.data.network.Currency
 import com.android.currencyconverter.databinding.ListItemCurrencyBinding
 
 class CurrencyAdapter(
-    private val currencies: List<Currency>
+    private val currencies: List<Currency>,
+    private val onClickListener: CurrencyOnClickListener
 ) : RecyclerView.Adapter<CurrencyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
@@ -17,7 +18,7 @@ class CurrencyAdapter(
     }
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
-        holder.bind(currencies[position])
+        holder.bind(currencies[position], onClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -30,8 +31,15 @@ class CurrencyViewHolder(binding: ListItemCurrencyBinding) : RecyclerView.ViewHo
     private val textCurrencyCode = binding.textCurrencyCode
     private val textCurrencyName = binding.textCurrencyName
 
-    fun bind(currency: Currency) {
+    fun bind(currency: Currency, onClickListener: CurrencyOnClickListener) {
         textCurrencyCode.text = currency.code
         textCurrencyName.text = currency.name
+        itemView.setOnClickListener {
+            onClickListener.onClick(currency)
+        }
     }
+}
+
+class CurrencyOnClickListener(val clickListener: (currency: Currency) -> Unit) {
+    fun onClick(currency: Currency) = clickListener(currency)
 }
