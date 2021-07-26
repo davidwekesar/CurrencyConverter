@@ -29,7 +29,7 @@ class SelectedCurrencyFragment : Fragment() {
 
         sharedViewModel.selectedCurrency.observe(viewLifecycleOwner, { currency ->
             binding.textCurrencyName.text =
-                getString(R.string.selected_currency_format, currency.name)
+                getString(R.string.selected_currency_format, currency.code, currency.name)
         })
 
         return binding.root

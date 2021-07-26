@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="From US Dollar" />
+        tools:text="From USD - US Dollar" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/numberInputLayout"
