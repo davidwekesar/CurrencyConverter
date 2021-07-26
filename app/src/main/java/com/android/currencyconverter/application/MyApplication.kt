@@ -1,6 +1,7 @@
-package com.android.currencyconverter
+package com.android.currencyconverter.application
 
 import android.app.Application
+import com.android.currencyconverter.BuildConfig
 import timber.log.Timber
 
 class MyApplication: Application() {
