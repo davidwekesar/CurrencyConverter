@@ -3,8 +3,8 @@ package com.android.currencyconverter.currencies
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.currencyconverter.data.network.Currency
 import com.android.currencyconverter.databinding.ListItemCurrencyBinding
+import com.android.currencyconverter.domain.Currency
 
 class CurrencyAdapter(
     private val currencies: List<Currency>,

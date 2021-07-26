@@ -1,31 +1,27 @@
 package com.android.currencyconverter.currencies
 
+import android.app.Application
 import androidx.lifecycle.*
-import com.android.currencyconverter.data.network.Currency
+import com.android.currencyconverter.database.getDatabase
+import com.android.currencyconverter.domain.Currency
 import com.android.currencyconverter.repositories.CurrenciesRepository
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class CurrenciesViewModel(private val repository: CurrenciesRepository) : ViewModel() {
+class CurrenciesViewModel(application: Application) : ViewModel() {
 
-    private val _currencies = MutableLiveData<List<Currency>>()
-    val currencies: LiveData<List<Currency>> get() = _currencies
+    private val currenciesRepository = CurrenciesRepository(getDatabase(application))
+
+    val currencies: LiveData<List<Currency>> = currenciesRepository.currencies
 
     init {
-        getAllCurrencies()
+        getDataFromRepository()
     }
 
-    private fun getAllCurrencies() {
+    private fun getDataFromRepository() {
         viewModelScope.launch {
             try {
-                val response = repository.getAllCurrencies()
-                val mutableList = mutableListOf<Currency>()
-                for (currencyItem in response.currencies) {
-                    val currency = Currency(currencyItem.key, currencyItem.value)
-                    mutableList.add(currency)
-                }
-                _currencies.value = mutableList
-                Timber.d("List: $mutableList")
+                currenciesRepository.refreshCurrencies()
             } catch (e: Exception) {
                 Timber.e("Failure: ${e.message}")
             }
@@ -34,13 +30,13 @@ class CurrenciesViewModel(private val repository: CurrenciesRepository) : ViewMo
 }
 
 class CurrenciesViewModelFactory(
-    private val repository: CurrenciesRepository
+    private val application: Application
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CurrenciesViewModel::class.java)) {
-            return CurrenciesViewModel(repository) as T
+            return CurrenciesViewModel(application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

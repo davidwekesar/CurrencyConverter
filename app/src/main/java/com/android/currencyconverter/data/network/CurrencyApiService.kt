@@ -21,7 +21,7 @@ private val retrofit = Retrofit.Builder()
 interface CurrencyApiService {
 
     @GET("api/list?access_key=${BuildConfig.CL_KEY}")
-    suspend fun getAllCurrencies(): CurrencyResponse
+    suspend fun getAllCurrencies(): NetworkCurrencyContainer
 }
 
 object CurrencyApi {

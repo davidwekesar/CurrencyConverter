@@ -20,11 +20,8 @@ class CurrenciesFragment : Fragment() {
 
     private var _binding: FragmentCurrenciesBinding? = null
     private val binding get() = _binding!!
-    private val repository: CurrenciesRepository by lazy {
-        CurrenciesRepository()
-    }
     private val viewModel: CurrenciesViewModel by viewModels {
-        CurrenciesViewModelFactory(repository)
+        CurrenciesViewModelFactory(application = requireActivity().application)
     }
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
