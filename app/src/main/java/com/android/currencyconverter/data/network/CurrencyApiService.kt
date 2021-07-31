@@ -6,6 +6,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 private const val BASE_URL = "http://apilayer.net/"
 
@@ -22,6 +23,9 @@ interface CurrencyApiService {
 
     @GET("api/list?access_key=${BuildConfig.CL_KEY}")
     suspend fun getAllCurrencies(): NetworkCurrencyContainer
+
+    @GET("api/live?access_key=${BuildConfig.CL_KEY}")
+    suspend fun getAllExchangeRates(): NetworkExchangeRatesContainer
 }
 
 object CurrencyApi {
