@@ -16,16 +16,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="From USD - US Dollar" />
+        tools:text="To USD - US Dollar" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/amountInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_medium"
-        app:errorEnabled="true"
         android:layout_marginTop="@dimen/default_medium"
         android:layout_marginEnd="@dimen/default_medium"
+        app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textCurrencyName">
@@ -50,17 +50,6 @@
         app:layout_constraintStart_toStartOf="@+id/amountInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/amountInputLayout" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/exchangeRatesRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTimestamp"
-        tools:listitem="@layout/list_item_exchange_rate" />
-
     <TextView
         android:id="@+id/textTimestamp"
         android:layout_width="wrap_content"
@@ -71,4 +60,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/convertButton"
         tools:text="Last updated: Jul 4, 2021, 12:08 PM" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/exchangeRatesRecyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTimestamp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exchangeRatesRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/list_item_exchange_rate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

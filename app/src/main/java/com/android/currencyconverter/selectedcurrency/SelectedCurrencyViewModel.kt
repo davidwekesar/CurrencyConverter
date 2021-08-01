@@ -18,7 +18,7 @@ class SelectedCurrencyViewModel(
 
     val exchangeRates: LiveData<List<CurrencyAndExchangeRate>> = repository.currencyAndExchangeRates
 
-    val timestamp: LiveData<Int> = repository.timestamp
+    val timestamp: Int = repository.timestamp
 }
 
 class SelectedCurrencyViewModelFactory(

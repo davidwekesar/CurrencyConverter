@@ -30,8 +30,7 @@ class CurrenciesRepository(private val database: CurrenciesDatabase) {
 
     val currencyAndExchangeRates: LiveData<List<CurrencyAndExchangeRate>> = database.exchangeRateDao.getCurrenciesAndRates()
 
-    private val _timestamp = MutableLiveData<Int>()
-    val timestamp: LiveData<Int> get() = _timestamp
+    var timestamp: Int = 0
 
     suspend fun refreshCurrenciesAndExchangeRates() {
         withContext(Dispatchers.IO) {
@@ -47,9 +46,9 @@ class CurrenciesRepository(private val database: CurrenciesDatabase) {
                     networkExchangeRate.currencyPair.contains(networkCurrency.code)
                 }
                 listOfConvertedRates = listOfRates.map {
-                    val newExchangeRate = it.exchangeRate / networkExchangeRate!!.exchangeRate
+                    val newExchangeRate = networkExchangeRate!!.exchangeRate / it.exchangeRate
                     val currencyName = it.currencyPair.split("USD")[1]
-                    val currencyPair = "${networkCurrency.code} / $currencyName"
+                    val currencyPair = "$currencyName / ${networkCurrency.code}"
                     val decimalFormat = DecimalFormat("#.######")
                     decimalFormat.roundingMode = RoundingMode.CEILING
                     val roundedExchangeRate: Double =
@@ -61,12 +60,6 @@ class CurrenciesRepository(private val database: CurrenciesDatabase) {
                 Timber.d("New List of Rates: $listOfConvertedRates")
                 database.exchangeRateDao.insertAll(databaseExchangeRates)
             }
-        }
-    }
-
-    suspend fun getSelectedExchangeRates(currencyCode: String): LiveData<List<DatabaseExchangeRate>> {
-        return withContext(Dispatchers.IO) {
-            database.exchangeRateDao.getSelectedExchangeRates(currencyCode)
         }
     }
 
@@ -85,7 +78,7 @@ class CurrenciesRepository(private val database: CurrenciesDatabase) {
             val exchangeRatesContainer = CurrencyApi.currencyService
                 .getAllExchangeRates()
             exchangeRatesContainer.timestamp?.let {
-                _timestamp.postValue(it)
+                timestamp = it
                 Timber.d("Timestamp: $it")
             }
             Timber.e("Error code: ${exchangeRatesContainer.error?.code}, Error info: ${exchangeRatesContainer.error?.info}")

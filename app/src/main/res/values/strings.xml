@@ -3,7 +3,7 @@
     <string name="currencies">Currencies</string>
     <string name="hint_enter_amount">Enter Amount</string>
     <string name="convert">Convert</string>
-    <string name="selected_currency_format">From %1$s - %2$s</string>
+    <string name="selected_currency_format">To %1$s - %2$s</string>
     <string name="equal_sign">=</string>
     <string name="decimal_format">#.#####</string>
     <string name="currency_pair_format">%1$s / %2$s</string>

@@ -46,13 +46,6 @@ class SelectedCurrencyFragment : Fragment() {
 
         updateRecyclerviewData()
 
-        selectedCurrencyViewModel.timestamp.observe(viewLifecycleOwner, {
-            Timber.d("Timestamp: $it")
-            val date = Date(it.toLong())
-            val formattedDate = SimpleDateFormat("MMM d, yyyy, HH:mm:ss z", Locale.getDefault()).format(date)
-            binding.textTimestamp.text = formattedDate
-        })
-
         binding.convertButton.setOnClickListener {
             getAmountInput()
         }
@@ -74,7 +67,8 @@ class SelectedCurrencyFragment : Fragment() {
 
     private fun updateRecyclerviewData(amount: Int = 1) {
         selectedCurrencyViewModel.exchangeRates.observe(viewLifecycleOwner, {
-            val dividerItemDecoration = DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
+            val dividerItemDecoration =
+                DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL)
             binding.exchangeRatesRecyclerView.apply {
                 val exchangeRateAdapter = ExchangeRateAdapter(
                     it,
