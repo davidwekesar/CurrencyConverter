@@ -4,22 +4,10 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
-@Dao
-interface CurrencyDao {
-
-    @Query("SELECT * FROM currencies")
-    fun getAllCurrencies(): LiveData<List<DatabaseCurrency>>
-
-    @Query("SELECT * FROM currencies")
-    fun getAllCurrenciesTest(): List<DatabaseCurrency>
-
-    @Insert
-    fun insertAll(currencies: List<DatabaseCurrency>)
-}
-
-@Database(entities = [DatabaseCurrency::class], version = 1)
+@Database(entities = [DatabaseCurrency::class, DatabaseExchangeRate::class], version = 1)
 abstract class CurrenciesDatabase : RoomDatabase() {
     abstract val currencyDao: CurrencyDao
+    abstract val exchangeRateDao: ExchangeRateDao
 }
 
 private lateinit var INSTANCE: CurrenciesDatabase

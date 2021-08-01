@@ -15,6 +15,7 @@ import com.android.currencyconverter.R
 import com.android.currencyconverter.databinding.FragmentCurrenciesBinding
 import com.android.currencyconverter.repositories.CurrenciesRepository
 import com.android.currencyconverter.viewmodels.SharedViewModel
+import timber.log.Timber
 
 class CurrenciesFragment : Fragment() {
 

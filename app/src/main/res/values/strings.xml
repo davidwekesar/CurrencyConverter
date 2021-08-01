@@ -5,4 +5,9 @@
     <string name="convert">Convert</string>
     <string name="selected_currency_format">From %1$s - %2$s</string>
     <string name="equal_sign">=</string>
+    <string name="decimal_format">#.#####</string>
+    <string name="currency_pair_format">%1$s / %2$s</string>
+    <string name="timestamp_format">Last updated: %1$s</string>
+    <string name="converted_amount_format">Amount = %1$f</string>
+    <string name="error_msg_amount">Amount Required</string>
 </resources>

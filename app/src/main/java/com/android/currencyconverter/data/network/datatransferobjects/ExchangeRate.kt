@@ -1,16 +1,7 @@
-package com.android.currencyconverter.data.network
+package com.android.currencyconverter.data.network.datatransferobjects
 
-import com.android.currencyconverter.database.DatabaseCurrency
+import com.android.currencyconverter.database.DatabaseExchangeRate
 import com.android.currencyconverter.domain.ExchangeRate
-
-data class NetworkCurrencyContainer(
-    val success: Boolean,
-    val terms: String,
-    val privacy: String,
-    val currencies: Map<String, String>
-)
-
-data class NetworkCurrency(val code: String, val name: String)
 
 data class NetworkExchangeRatesContainer(
     val success: Boolean,
@@ -23,11 +14,13 @@ data class NetworkExchangeRatesError(val code: Int, val info: String)
 
 data class NetworkExchangeRate(val currencyPair: String, val exchangeRate: Double)
 
-fun List<NetworkCurrency>.asDatabaseModel(): List<DatabaseCurrency> {
-    return map { networkCurrency ->
-        with(networkCurrency) {
-            DatabaseCurrency(code = code, name = name)
-        }
+fun List<NetworkExchangeRate>.asDatabaseExchangeRateModel(currencyCode: String): List<DatabaseExchangeRate> {
+    return map { networkExchangeRate ->
+        DatabaseExchangeRate(
+            currencyPair = networkExchangeRate.currencyPair,
+            exchangeRate = networkExchangeRate.exchangeRate,
+            currencyCode = currencyCode
+        )
     }
 }
 

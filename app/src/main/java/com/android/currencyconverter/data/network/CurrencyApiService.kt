@@ -1,12 +1,13 @@
 package com.android.currencyconverter.data.network
 
 import com.android.currencyconverter.BuildConfig
+import com.android.currencyconverter.data.network.datatransferobjects.NetworkCurrencyContainer
+import com.android.currencyconverter.data.network.datatransferobjects.NetworkExchangeRatesContainer
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 private const val BASE_URL = "http://apilayer.net/"
 

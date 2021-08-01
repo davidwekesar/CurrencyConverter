@@ -2,6 +2,7 @@ package com.android.currencyconverter.currencies
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.android.currencyconverter.database.CurrencyAndExchangeRate
 import com.android.currencyconverter.database.getDatabase
 import com.android.currencyconverter.domain.Currency
 import com.android.currencyconverter.repositories.CurrenciesRepository
@@ -15,13 +16,13 @@ class CurrenciesViewModel(application: Application) : ViewModel() {
     val currencies: LiveData<List<Currency>> = currenciesRepository.currencies
 
     init {
-        getDataFromRepository()
+        refreshDataFromRepository()
     }
 
-    private fun getDataFromRepository() {
+    private fun refreshDataFromRepository() {
         viewModelScope.launch {
             try {
-                currenciesRepository.refreshCurrencies()
+                currenciesRepository.refreshCurrenciesAndExchangeRates()
             } catch (e: Exception) {
                 Timber.e("Failure: ${e.message}")
             }

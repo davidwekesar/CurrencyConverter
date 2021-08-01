@@ -35,7 +35,7 @@ class CurrenciesDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun writeAndReadCurrency() {
+    fun writeAndReadCurrencies() {
         val currencyList = mutableListOf(
             NetworkCurrency("AED", "United Arab Emirates Dirham"),
             NetworkCurrency("AFN", "Afghan Afghani"),
